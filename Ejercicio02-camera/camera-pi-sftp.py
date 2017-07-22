@@ -1,11 +1,20 @@
 #!/usr/bin/python3
+
+# para instalar pysftp seguir los pasos:
+#  sudo apt-get install python-dev
+#  sudo apt-get install libffi-dev
+#  sudo apt-get install libssl-dev
+#  pip install pysftp (tarda bastante en instalar)
+
+# Información sobre pysftp:
+#  https://pypi.python.org/pypi/pysftp
+#  documentación pysftp https://pysftp.readthedocs.io/en/release_0.2.9/
+#  proyecto pysftp https://bitbucket.org/dundeemt/pysftp
+
 import time
 from picamera import PiCamera
-import pysftp	# pip install pysftp https://pypi.python.org/pypi/pysftp
+import pysftp	
 from datetime import datetime
-
-# documentación pysftp https://pysftp.readthedocs.io/en/release_0.2.9/
-# proyecto pysftp https://bitbucket.org/dundeemt/pysftp
 
 sftp =  pysftp.Connection('hostname', username='me', password='secret')
 
