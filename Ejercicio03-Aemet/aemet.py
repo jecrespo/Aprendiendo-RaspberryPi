@@ -1,10 +1,11 @@
 import requests
 import json
-from datetime import datetime
+import datetime
+
 
 url = "https://opendata.aemet.es/opendata/api/valores/climatologicos/inventarioestaciones/todasestaciones/"
 
-querystring = {"api_key":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWNyZXNwb21AZ21haWwuY29tIiwianRpIjoiMjUyYjk2OTAtNzI1Yi00OTEzLTlkYmEtZTczMjY0ZDg5OTUzIiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE1ODMyMjk5MDUsInVzZXJJZCI6IjI1MmI5NjkwLTcyNWItNDkxMy05ZGJhLWU3MzI2NGQ4OTk1MyIsInJvbGUiOiIifQ.gMxjlUTd7CM3fc3F0_lAXXGnrDyFAB-GBSEpD6CLetA"}
+querystring = {"api_key":"apikey_solicitada_a_aemet"} #pedir apikey en https://opendata.aemet.es/centrodedescargas/inicio
 
 headers = {
     'cache-control': "no-cache"
@@ -31,12 +32,14 @@ for estacion in estaciones_json:
 		print(estacion["nombre"], estacion["indicativo"])
 		indicativo_log = estacion["indicativo"]
 
-now = datetime.now()
-date_time_sup = now.strftime("%Y-%m-%dT%H:%M:%SUTC")
-date_time_inf = now.strftime("%Y-%m-%dT00:00:00UTC")
+now = datetime.datetime.now()
+date_time_sup = now.strftime("%Y-%m-%dT00:00:00UTC")
+date_time_inf = (now - datetime.timedelta(days=7)).strftime("%Y-%m-%dT00:00:00UTC")
+print(date_time_sup,date_time_inf)
 
-date_time_sup = "2020-03-02T00:00:00UTC"
-date_time_inf = "2020-02-26T00:00:00UTC"
+#date_time_sup = "2020-03-02T00:00:00UTC"
+#date_time_inf = "2020-02-26T00:00:00UTC"
+#print(date_time_sup,date_time_inf)
 
 url_valores_climaticos = "https://opendata.aemet.es/opendata/api/valores/climatologicos/diarios/datos/fechaini/" + date_time_inf + "/fechafin/" + date_time_sup + "/estacion/" + indicativo_log
 
